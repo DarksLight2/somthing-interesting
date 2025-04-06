@@ -1,0 +1,24 @@
+services:
+  mailserver:
+    image: mailserver/docker-mailserver:latest
+    container_name: mailserver
+    hostname: <subdomain>
+    domainname: <domain>
+    env_file: mailserver.env
+    volumes:
+      - ./docker-data/ssl:/etc/mailserver/ssl
+      - ./docker-data/mail:/var/mail
+      - ./docker-data/state:/var/mail-state
+      - ./docker-data/logs:/var/log/mail
+      - ./config/:/tmp/docker-mailserver/
+    ports:
+      - "25:25"
+      - "587:587"
+      - "993:993"
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_PTRACE
+    security_opt:
+      - no-new-privileges:true
+
