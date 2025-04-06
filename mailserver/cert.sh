@@ -5,3 +5,6 @@ cp /etc/letsencrypt/live/<subdomain>.<domain>/privkey.pem ./docker-data/ssl/
 
 #add mail
 ./setup.sh email add noreply@<domain> mypassword123
+#dkim
+# 
+./setup.sh config dkim 
